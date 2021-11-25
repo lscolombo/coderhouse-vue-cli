@@ -22,3 +22,16 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Vue Generate Component
+- For single file:
+```
+vgc -s Navbar 
+```
+
+- For separated files:
+```
+vgc Navbar 
+```
+
