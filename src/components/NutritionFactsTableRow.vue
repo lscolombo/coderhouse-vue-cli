@@ -1,10 +1,9 @@
 <template lang="html">
-
-    <tr>
+        <tr>
             <td>{{name}}</td>
             <td>{{calories}}</td>
-            <td>{{carbs}}</td>
-            <td>{{fat}}</td>
+            <td>{{ingredients}}</td>
+            <td>{{vegan}}</td>
         </tr>
 
 </template>
@@ -15,23 +14,9 @@
     name: 'NutritionFactsTableRow',
     props: {
         name: String,
-        calories: String,
-        carbs: String,
-        fat: String
-    },
-    mounted () {
-
-    },
-    data () {
-      return {
-
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
+        calories: Number,
+        ingredients: String,
+        vegan: String
     }
 }
 
@@ -39,7 +24,6 @@
 </script>
 
 <style scoped lang="scss">
-  .nutrition-facts-table-row {
-
-  }
+.nutrition-facts-table-row {
+}
 </style>

@@ -1,160 +1,132 @@
 <template>
-  <div id="app">
-  <div class="table-options">
-        <h4 class="text-primary">Estilos de tabla</h4>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="check-dark-mode" @click="toggleDarkMode">
-            <label class="form-check-label" for="check-dark-mode">
-              Modo oscuro
-            </label>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <div class="row">
+        <div class="col-sm">
+          <Form @itemAdded="addItem" />
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="check-striped-mode" @click="toggleStripedMode">
-            <label class="form-check-label" for="check-striped-mode">
-              Modo a rayas
-            </label>
+        <div class="col-sm">
+          <NutritionFactsTable :foods="foods" />
         </div>
-    </div>
-    <div>
-        <NutritionFactsTable :foods="foods" :class="darkMode + ' ' + stripedMode" />
-    </div>
-  </div>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import NutritionFactsTable from './components/NutritionFactsTable.vue'
+import NutritionFactsTable from "./components/NutritionFactsTable.vue";
+import Form from "./components/Form.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    NutritionFactsTable
+    NutritionFactsTable,
+    Form,
   },
-  data() { return {
-        darkModeActive: false,
-        darkMode: "",
-        stripedModeActive: false,
-        stripedMode: "",
-        foods: [
-            {
-                "ID": 1,
-                "CAL": "740",
-                "FAT": "41",
-                "SFAT": "16",
-                "TFAT": "1.5",
-                "CHOL": "125",
-                "SALT": "1480",
-                "CARB": "51",
-                "FBR": "4",
-                "SGR": "14",
-                "PRO": "40",
-                "ITEM": "Bacon Clubhouse Burger 9.7 oz (274 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 2,
-                "CAL": "610",
-                "FAT": "26",
-                "SFAT": "8",
-                "TFAT": "0",
-                "CHOL": "125",
-                "SALT": "1750",
-                "CARB": "50",
-                "FBR": "3",
-                "SGR": "14",
-                "PRO": "45",
-                "ITEM": "Premium Grilled Chicken Bacon Clubhouse Sandwich 10 oz (285 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 3,
-                "CAL": "790",
-                "FAT": "40",
-                "SFAT": "11",
-                "TFAT": "0.5",
-                "CHOL": "110",
-                "SALT": "1620",
-                "CARB": "67",
-                "FBR": "5",
-                "SGR": "15",
-                "PRO": "40",
-                "ITEM": "Premium Buttermilk Crispy Chicken Bacon Clubhouse Sandwich 10.1 oz (287 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 4,
-                "CAL": "370",
-                "FAT": "17",
-                "SFAT": "3.5",
-                "TFAT": "0",
-                "CHOL": "40",
-                "SALT": "650",
-                "CARB": "40",
-                "FBR": "2",
-                "SGR": "5",
-                "PRO": "14",
-                "ITEM": "McChicken \u00ae 5.1 oz (144 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 5,
-                "CAL": "370",
-                "FAT": "17",
-                "SFAT": "3.5",
-                "TFAT": "0",
-                "CHOL": "40",
-                "SALT": "850",
-                "CARB": "41",
-                "FBR": "2",
-                "SGR": "5",
-                "PRO": "14",
-                "ITEM": "Buffalo Ranch McChicken 5.2 oz (148 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 6,
-                "CAL": "440",
-                "FAT": "21",
-                "SFAT": "5",
-                "TFAT": "0",
-                "CHOL": "55",
-                "SALT": "1120",
-                "CARB": "41",
-                "FBR": "2",
-                "SGR": "6",
-                "PRO": "20",
-                "ITEM": "Bacon Buffalo Ranch McChicken 5.7 oz (162 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            },
-            {
-                "ID": 7,
-                "CAL": "490",
-                "FAT": "25",
-                "SFAT": "7",
-                "TFAT": "0",
-                "CHOL": "70",
-                "SALT": "1120",
-                "CARB": "43",
-                "FBR": "2",
-                "SGR": "6",
-                "PRO": "22",
-                "ITEM": "Bacon Cheddar McChicken 6.1 oz (172 g)",
-                "CATEGORY": "BURGERSANDWICH"
-            }
-        ]}
-    }, 
-    methods: {
-       toggleDarkMode() {
-            this.darkModeActive = !this.darkModeActive
-            this.darkModeActive ? (this.darkMode = "table-dark") : (this.darkMode="")
+  data() {
+    return {
+      darkModeActive: false,
+      darkMode: "",
+      stripedModeActive: false,
+      stripedMode: "",
+      foods: [
+        {
+          ID: 1,
+          CAL: 740,
+          INGR: "Tomate, Lechuga",
+          VEGAN: "Sí",
+          FAT: "41",
+          SFAT: "16",
+          TFAT: "1.5",
+          CHOL: "125",
+          SALT: "1480",
+          CARB: "51",
+          FBR: "4",
+          SGR: "14",
+          PRO: "40",
+          ITEM: "Bacon Clubhouse Burger 9.7 oz (274 g)",
+          CATEGORY: "BURGERSANDWICH",
         },
-        toggleStripedMode() {
-            this.stripedModeActive = !this.stripedModeActive
-            this.stripedModeActive ? (this.stripedMode = "table-striped") : (this.stripedMode="")
-        }
-    }
-}
+        {
+          ID: 2,
+          CAL: 610,
+          INGR: "Tomate, Lechuga",
+          VEGAN: "Sí",
+          FAT: "26",
+          SFAT: "8",
+          TFAT: "0",
+          CHOL: "125",
+          SALT: "1750",
+          CARB: "50",
+          FBR: "3",
+          SGR: "14",
+          PRO: "45",
+          ITEM: "Premium Grilled Chicken Bacon Clubhouse Sandwich 10 oz (285 g)",
+          CATEGORY: "BURGERSANDWICH",
+        },
+        {
+          ID: 3,
+          CAL: 790,
+          INGR: "Tomate, Lechuga",
+          VEGAN: "Sí",
+          FAT: "40",
+          SFAT: "11",
+          TFAT: "0.5",
+          CHOL: "110",
+          SALT: "1620",
+          CARB: "67",
+          FBR: "5",
+          SGR: "15",
+          PRO: "40",
+          ITEM: "Premium Buttermilk Crispy Chicken Bacon Clubhouse Sandwich 10.1 oz (287 g)",
+          CATEGORY: "BURGERSANDWICH",
+        },
+      ],
+    };
+  },
+  methods: {
+    addItem: function (food) {
+      food.ID = this.lastID() + 1;
+      console.log(food);
+      this.foods.push(food);
+    },
+    lastID: function () {
+      let ids = this.foods.map((food) => food.ID);
+      return Math.max(...ids);
+    },
+  },
+};
 </script>
-
-<style>
-@import './assets/css/styles.css';
-</style>

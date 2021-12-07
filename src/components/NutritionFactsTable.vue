@@ -5,8 +5,8 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Calorías</th>
-                    <th>Carbohidratos</th>
-                    <th>Grasas</th>
+                    <th>Ingredientes</th>
+                    <th>Apto vegano</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,8 +15,8 @@
             :key="food.ID"
             :name="food.ITEM"
             :calories="food.CAL"
-            :carbs="food.CARB"
-            :fat="food.FAT"
+            :ingredients="food.INGR"
+            :vegan="food.VEGAN"
             />
             </tbody>
         </table>
